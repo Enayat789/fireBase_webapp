@@ -3,6 +3,7 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Login/firebase";
 import { useNavigate } from "react-router-dom";
+// import { FirebaseError } from "firebase/app";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -19,12 +20,16 @@ const SignUp = () => {
       );
       console.log(userCredentials);
     } catch (error) {
-      //   console.error(error);
-      alert(error.message);
-      // if (email === "") {
-      //   alert("blank");
-      // } else {
-      // }
+      console.error(error);
+      if (error.code === "auth/missing-email") {
+        alert("Please enter email");
+      } else if (error.code === "auth/invalid-email") {
+        alert("Invalid Email");
+      } else if (error.code === "auth/missing-password") {
+        alert("Enter password");
+      } else if (error.code === "auth/weak-password") {
+        alert("Password should be at least 6 characters");
+      }
     }
   };
 
