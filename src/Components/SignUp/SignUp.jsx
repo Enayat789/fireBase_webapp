@@ -29,6 +29,8 @@ const SignUp = () => {
         alert("Enter password");
       } else if (error.code === "auth/weak-password") {
         alert("Password should be at least 6 characters");
+      } else if (error.code === "auth/email-already-in-use") {
+        alert("Already have an account with this email");
       }
     }
   };
@@ -43,7 +45,7 @@ const SignUp = () => {
         Create Account
       </h2>
 
-      <div className=" bg-gray-400 w-[35%] h-auto pt-6 p-3 flex flex-col items-center justify-between gap-6 rounded-md">
+      <div className=" bg-gray-400 w-[35%] h-auto pt-10 p-3 flex flex-col items-center justify-between gap-6 rounded-md">
         <input
           type="text"
           placeholder="Name..."

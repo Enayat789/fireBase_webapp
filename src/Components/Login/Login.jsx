@@ -19,6 +19,14 @@ const Login = () => {
       console.log(userCredentials);
     } catch (error) {
       console.error(error);
+
+      if (error.code === "auth/invalid-email") {
+        alert("invalid email");
+      } else if (error.code === "auth/missing-password") {
+        alert("invalid password");
+      } else if (error.code === "auth/invalid-credential") {
+        alert("invalid credentials");
+      }
     }
   };
 
@@ -28,15 +36,15 @@ const Login = () => {
 
   return (
     <div className=" w-[100vw] h-[100vh] flex flex-col items-center gap-6 ">
-      <h2 className=" w-[35%] flex  justify-center text-4xl text-gray-600 mt-32">
+      <h2 className=" w-[40%] flex  justify-center text-4xl text-gray-600 mt-32">
         Login To Your Account
       </h2>
 
-      <div className=" bg-gray-400 w-[35%] h-[40%] flex flex-col items-center justify-center gap-10 rounded-md">
+      <div className=" bg-gray-400 w-[35%] h-auto p-3 pt-10 flex flex-col items-center justify-center gap-10 rounded-md">
         <input
           type="email"
           placeholder="Email..."
-          className=" w-[70%] p-3 text-lg border-none outline-none rounded-md "
+          className=" w-[70%] p-3 text-lg border-none outline-none rounded-md"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
