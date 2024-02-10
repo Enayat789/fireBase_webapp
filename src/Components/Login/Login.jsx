@@ -56,7 +56,7 @@ const Login = () => {
           </button>
 
           <p onClick={forSignup} className=" cursor-pointer">
-            or SignUp?
+            <u>or SignUp?</u>
           </p>
         </div>
       </div>

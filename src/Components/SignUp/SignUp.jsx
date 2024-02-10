@@ -2,10 +2,12 @@ import React from "react";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Login/firebase";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const signUp = async (e) => {
     e.preventDefault();
@@ -17,8 +19,17 @@ const SignUp = () => {
       );
       console.log(userCredentials);
     } catch (error) {
-      console.error(error);
+      //   console.error(error);
+      alert(error.message);
+      // if (email === "") {
+      //   alert("blank");
+      // } else {
+      // }
     }
+  };
+
+  const forSignIn = () => {
+    navigate("/");
   };
 
   return (
@@ -27,18 +38,25 @@ const SignUp = () => {
         Create Account
       </h2>
 
-      <div className=" bg-gray-400 w-[35%] h-[40%] flex flex-col items-center justify-center gap-10 rounded-md">
+      <div className=" bg-gray-400 w-[35%] h-auto pt-6 p-3 flex flex-col items-center justify-between gap-6 rounded-md">
+        <input
+          type="text"
+          placeholder="Name..."
+          className=" w-[70%] p-3 text-lg border-none outline-none rounded-md "
+        />
         <input
           type="email"
-          placeholder="Email..."
+          placeholder="email@gmail.com"
           className=" w-[70%] p-3 text-lg border-none outline-none rounded-md "
           value={email}
+          required
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
-          placeholder="Password..."
+          placeholder="pass*****"
           value={password}
+          required
           onChange={(e) => setPassword(e.target.value)}
           className=" w-[70%] p-3 text-lg border-none outline-none rounded-md  "
         />
@@ -50,7 +68,9 @@ const SignUp = () => {
             Sign Up
           </button>
 
-          <p className=" cursor-pointer">or SignIn?</p>
+          <p className=" cursor-pointer" onClick={forSignIn}>
+            <u>or SignIn?</u>
+          </p>
         </div>
       </div>
     </div>
