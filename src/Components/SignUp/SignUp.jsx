@@ -2,13 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Login/firebase";
-import { useNavigate } from "react-router-dom";
-// import { FirebaseError } from "firebase/app";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
   const signUp = async (e) => {
     e.preventDefault();
@@ -21,6 +19,8 @@ const SignUp = () => {
       console.log(userCredentials);
     } catch (error) {
       console.error(error);
+
+      // here checking the error based on firebase
       if (error.code === "auth/missing-email") {
         alert("Please enter email");
       } else if (error.code === "auth/invalid-email") {
@@ -33,10 +33,6 @@ const SignUp = () => {
         alert("Already have an account with this email");
       }
     }
-  };
-
-  const forSignIn = () => {
-    navigate("/");
   };
 
   return (
@@ -75,9 +71,10 @@ const SignUp = () => {
             Sign Up
           </button>
 
-          <p className=" cursor-pointer" onClick={forSignIn}>
+          {/* to navigate to SIGNIN COMP. i am using link */}
+          <Link to="/">
             <u>or SignIn?</u>
-          </p>
+          </Link>
         </div>
       </div>
     </div>

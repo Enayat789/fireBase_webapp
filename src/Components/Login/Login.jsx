@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
   const signIn = async (e) => {
     e.preventDefault();
@@ -28,10 +27,6 @@ const Login = () => {
         alert("invalid credentials");
       }
     }
-  };
-
-  const forSignup = () => {
-    navigate("/signup");
   };
 
   return (
@@ -63,9 +58,10 @@ const Login = () => {
             Login
           </button>
 
-          <p onClick={forSignup} className=" cursor-pointer">
+          {/* using LINK to Navigate to the SIGNUP UI */}
+          <Link to="/signup">
             <u>or SignUp?</u>
-          </p>
+          </Link>
         </div>
       </div>
     </div>
