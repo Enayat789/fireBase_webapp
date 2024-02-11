@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../Login/firebase";
+import { auth } from "../../firebase";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
