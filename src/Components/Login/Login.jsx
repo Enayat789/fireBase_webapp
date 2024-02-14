@@ -2,15 +2,21 @@ import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
+import Loader from "../Loader/Loader";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const signIn = async (e) => {
+    // loader
+    setLoading(true);
+
     if (email === "" && password === "") {
-      alert("Enter credentials ");
+      alert("Enter credebtials");
+      //
     } else {
       e.preventDefault();
       try {
@@ -19,12 +25,13 @@ const Login = () => {
           email,
           password
         );
+
         console.log(userCredentials);
         navigate("/hero");
+
         //
       } catch (error) {
         console.error(error);
-
         if (error.code === "auth/invalid-email") {
           alert("invalid email");
         } else if (error.code === "auth/missing-password") {
@@ -32,12 +39,16 @@ const Login = () => {
         } else if (error.code === "auth/invalid-credential") {
           alert("invalid credentials");
         }
+      } finally {
+        setLoading(false);
       }
     }
   };
 
   return (
     <div className=" w-[100vw] h-[100vh] flex flex-col items-center gap-6 ">
+      {loading && <div>{Loader}</div>}
+
       <h2 className=" w-[40%] flex  justify-center text-4xl text-gray-600 mt-32">
         Login To Your Account
       </h2>
