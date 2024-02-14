@@ -72,11 +72,15 @@ const SignUp = () => {
           </button>
 
           {/* to navigate to SIGNIN COMP. i am using link */}
-          <Link to="/">
+          <Link to="/signin">
             <u>or SignIn?</u>
           </Link>
         </div>
       </div>
+
+      <Link to="/">
+        <button className=" bg-gray-300 pl-6 pr-6 p-3 rounded-lg">Home</button>
+      </Link>
     </div>
   );
 };

@@ -64,6 +64,10 @@ const Login = () => {
           </Link>
         </div>
       </div>
+
+      <Link to="/">
+        <button className=" bg-gray-300 pl-6 pr-6 p-3 rounded-lg">Home</button>
+      </Link>
     </div>
   );
 };
