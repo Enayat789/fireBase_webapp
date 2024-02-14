@@ -1,30 +1,38 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const signIn = async (e) => {
-    e.preventDefault();
-    try {
-      const userCredentials = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log(userCredentials);
-    } catch (error) {
-      console.error(error);
+    if (email === "" && password === "") {
+      alert("Enter credentials ");
+      return;
+    } else {
+      e.preventDefault();
+      try {
+        const userCredentials = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        console.log(userCredentials);
+        navigate("/");
+        //
+      } catch (error) {
+        console.error(error);
 
-      if (error.code === "auth/invalid-email") {
-        alert("invalid email");
-      } else if (error.code === "auth/missing-password") {
-        alert("invalid password");
-      } else if (error.code === "auth/invalid-credential") {
-        alert("invalid credentials");
+        if (error.code === "auth/invalid-email") {
+          alert("invalid email");
+        } else if (error.code === "auth/missing-password") {
+          alert("invalid password");
+        } else if (error.code === "auth/invalid-credential") {
+          alert("invalid credentials");
+        }
       }
     }
   };

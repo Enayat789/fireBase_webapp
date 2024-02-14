@@ -2,35 +2,48 @@ import React from "react";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // const [name, setName] = useState("");
+  const navigate = useNavigate();
 
   const signUp = async (e) => {
-    e.preventDefault();
-    try {
-      const userCredentials = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log(userCredentials);
-    } catch (error) {
-      console.error(error);
+    // else if (name == "") {
+    //   alert("Enter name");
+    // }
 
-      // here checking the error based on firebase
-      if (error.code === "auth/missing-email") {
-        alert("Please enter email");
-      } else if (error.code === "auth/invalid-email") {
-        alert("Invalid Email");
-      } else if (error.code === "auth/missing-password") {
-        alert("Enter password");
-      } else if (error.code === "auth/weak-password") {
-        alert("Password should be at least 6 characters");
-      } else if (error.code === "auth/email-already-in-use") {
-        alert("Already have an account with this email");
+    if (email === "" && password === "") {
+      alert("Enter credentials ");
+    } else {
+      e.preventDefault();
+      try {
+        const userCredentials = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        console.log(userCredentials);
+        alert("account created");
+        navigate("/");
+        //
+      } catch (error) {
+        console.error(error);
+        // here checking the error based on firebase
+        if (error.code === "auth/missing-email") {
+          alert("Please enter email");
+        } else if (error.code === "auth/invalid-email") {
+          alert("Invalid Email");
+        } else if (error.code === "auth/missing-password") {
+          alert("Enter password");
+        } else if (error.code === "auth/weak-password") {
+          alert("Password should be at least 6 characters");
+        } else if (error.code === "auth/email-already-in-use") {
+          alert("Already have an account with this email");
+        }
       }
     }
   };
