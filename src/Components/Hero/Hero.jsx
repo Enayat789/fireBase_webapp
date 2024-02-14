@@ -3,7 +3,7 @@ import React from "react";
 const Hero = () => {
   return (
     <div>
-      <p>I am hero..section</p>
+      <p>Welcome to Fire Base web app...</p>
     </div>
   );
 };

@@ -11,7 +11,6 @@ const Login = () => {
   const signIn = async (e) => {
     if (email === "" && password === "") {
       alert("Enter credentials ");
-      return;
     } else {
       e.preventDefault();
       try {
@@ -21,7 +20,7 @@ const Login = () => {
           password
         );
         console.log(userCredentials);
-        navigate("/");
+        navigate("/hero");
         //
       } catch (error) {
         console.error(error);

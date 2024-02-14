@@ -28,7 +28,7 @@ const SignUp = () => {
 
         console.log(userCredentials);
         alert("account created");
-        navigate("/");
+        navigate("/hero");
         //
       } catch (error) {
         console.error(error);
