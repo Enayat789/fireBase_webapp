@@ -2,11 +2,13 @@ import React from "react";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+import Loader from "../Loader/Loader";
 import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loader, setLoader] = useState(false);
   // const [name, setName] = useState("");
   const navigate = useNavigate();
 
@@ -14,9 +16,13 @@ const SignUp = () => {
     // else if (name == "") {
     //   alert("Enter name");
     // }
+    // SHOW LOADER
+    setLoader(true);
 
     if (email === "" && password === "") {
       alert("Enter credentials ");
+      // HIDE LOADER
+      setLoader(false);
     } else {
       e.preventDefault();
       try {
@@ -44,12 +50,17 @@ const SignUp = () => {
         } else if (error.code === "auth/email-already-in-use") {
           alert("Already have an account with this email");
         }
+        // HIDE LOADER
+        setLoader(false);
       }
     }
   };
 
   return (
     <div className=" w-[100vw] h-[100vh] flex flex-col items-center gap-6 ">
+      {/* LOADER */}
+      {loader && <Loader />}
+
       <h2 className=" w-[35%] flex  justify-center text-4xl text-gray-600 mt-32">
         Create Account
       </h2>
