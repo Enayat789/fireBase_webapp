@@ -7,16 +7,17 @@ import Loader from "../Loader/Loader";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const signIn = async (e) => {
-    // loader
+    // SHOW LOADER
     setLoading(true);
 
     if (email === "" && password === "") {
       alert("Enter credebtials");
-      //
+      //HIDE LOADER
+      setLoading(false);
     } else {
       e.preventDefault();
       try {
@@ -39,7 +40,7 @@ const Login = () => {
         } else if (error.code === "auth/invalid-credential") {
           alert("invalid credentials");
         }
-      } finally {
+        // HIDE LOADER
         setLoading(false);
       }
     }
@@ -47,7 +48,8 @@ const Login = () => {
 
   return (
     <div className=" w-[100vw] h-[100vh] flex flex-col items-center gap-6 ">
-      {loading && <div>{Loader}</div>}
+      {/* Loader added */}
+      {loading && <Loader />}
 
       <h2 className=" w-[40%] flex  justify-center text-4xl text-gray-600 mt-32">
         Login To Your Account

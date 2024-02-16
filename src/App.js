@@ -1,7 +1,7 @@
 import "./App.css";
 import Hero from "./Components/Hero/Hero";
 import Home from "./Components/Home/Home";
-import Loader from "./Components/Loader/Loader";
+// import Loader from "./Components/Loader/Loader";
 import Login from "./Components/Login/Login";
 import SignUp from "./Components/SignUp/SignUp";
 import { Routes, Route } from "react-router-dom";
