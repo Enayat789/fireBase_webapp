@@ -1,11 +1,11 @@
 import "./App.css";
 import Hero from "./Components/Hero/Hero";
 import Home from "./Components/Home/Home";
-// import Loader from "./Components/Loader/Loader";
 import Login from "./Components/Login/Login";
 import SignUp from "./Components/SignUp/SignUp";
 import { Routes, Route } from "react-router-dom";
-import { Bounce, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -18,17 +18,13 @@ function App() {
       </Routes>
 
       <ToastContainer
-        position="top-right"
+        position="top-center"
         autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
         closeOnClick
-        rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
         theme="light"
-        transition={Bounce}
       />
     </>
   );

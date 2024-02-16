@@ -16,8 +16,7 @@ const Login = () => {
     setLoading(true);
 
     if (email === "" || password === "") {
-      // alert("Please enter both email and password");
-      toast.info("Please enter both email and password");
+      toast.warn("Please enter both email and password");
       //HIDE LOADER
       setLoading(false);
     } else {
@@ -28,6 +27,7 @@ const Login = () => {
           email,
           password
         );
+        toast.success("Logged in Successfully");
 
         console.log(userCredentials);
         navigate("/hero");
@@ -36,11 +36,11 @@ const Login = () => {
       } catch (error) {
         console.error(error);
         if (error.code === "auth/invalid-email") {
-          alert("invalid email");
+          toast.error("invalid email");
         } else if (error.code === "auth/missing-password") {
-          alert("invalid password");
+          toast.error("invalid password");
         } else if (error.code === "auth/invalid-credential") {
-          alert("invalid credentials");
+          toast.error("invalid credentials");
         }
         // HIDE LOADER
         setLoading(false);

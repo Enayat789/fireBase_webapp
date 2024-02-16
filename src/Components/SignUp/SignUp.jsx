@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import Loader from "../Loader/Loader";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -19,8 +20,8 @@ const SignUp = () => {
     // SHOW LOADER
     setLoader(true);
 
-    if (email === "" && password === "") {
-      alert("Enter credentials ");
+    if (email === "" || password === "") {
+      toast.warn("Enter credentials ");
       // HIDE LOADER
       setLoader(false);
     } else {
@@ -32,23 +33,23 @@ const SignUp = () => {
           password
         );
 
+        toast.success("account created");
         console.log(userCredentials);
-        alert("account created");
         navigate("/hero");
         //
       } catch (error) {
         console.error(error);
         // here checking the error based on firebase
         if (error.code === "auth/missing-email") {
-          alert("Please enter email");
+          toast.error("Please enter email");
         } else if (error.code === "auth/invalid-email") {
-          alert("Invalid Email");
+          toast.error("Invalid Email");
         } else if (error.code === "auth/missing-password") {
-          alert("Enter password");
+          toast.error("Enter password");
         } else if (error.code === "auth/weak-password") {
-          alert("Password should be at least 6 characters");
+          toast.error("Password should be at least 6 characters");
         } else if (error.code === "auth/email-already-in-use") {
-          alert("Already have an account with this email");
+          toast.error("Already have an account with this email");
         }
         // HIDE LOADER
         setLoader(false);
