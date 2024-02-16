@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import Loader from "../Loader/Loader";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,8 +15,9 @@ const Login = () => {
     // SHOW LOADER
     setLoading(true);
 
-    if (email === "" && password === "") {
-      alert("Enter credebtials");
+    if (email === "" || password === "") {
+      // alert("Please enter both email and password");
+      toast.info("Please enter both email and password");
       //HIDE LOADER
       setLoading(false);
     } else {
